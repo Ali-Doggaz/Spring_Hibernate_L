@@ -35,6 +35,9 @@ public class Student {
     private String lastName;
 
     @NotNull
+    @Column(
+            unique = true
+    )
     private String email;
 
     public Student(long id, String firstName, String lastName, String email) {
