@@ -2,19 +2,30 @@ package com.example.demo.student;
 
 import com.sun.istack.NotNull;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-@Entity
+import static javax.persistence.GenerationType.SEQUENCE;
+
+@Entity(name="Student")
 public class Student {
     @Id
-    @GeneratedValue
+    @SequenceGenerator(
+            name="student_sequence",
+            sequenceName = "student_sequence",
+            allocationSize = 1 // How much the sequence increases for each new row
+    )
+    @GeneratedValue(
+            strategy = SEQUENCE,
+            generator = "student_sequence"
+    )
+    @Column(name="id",
+            updatable = false
+            // NULLABLE=FALSE, ColumnDefinition = TEXT, unique=TRUE, etc....
+            )
     private long id;
 
     @NotNull
-    private String firstNname;
+    private String firstName;
 
     @NotNull
     private String lastName;
@@ -22,22 +33,18 @@ public class Student {
     @NotNull
     private String email;
 
-    @NotNull
-    private int age;
+    public Student(long id, String firstName, String lastName, String email) {
 
-    public Student(long id, String firstNname, String lastName, String email, int age) {
         this.id = id;
-        this.firstNname = firstNname;
+        this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.age = age;
     }
 
-    public Student(String firstNname, String lastName, String email, int age) {
-        this.firstNname = firstNname;
+    public Student(String firstName, String lastName, String email) {
+        this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.age = age;
     }
 
     public Student() {
@@ -52,11 +59,11 @@ public class Student {
     }
 
     public String getFirstNname() {
-        return firstNname;
+        return firstName;
     }
 
-    public void setFirstNname(String firstNname) {
-        this.firstNname = firstNname;
+    public void setFirstNname(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -75,11 +82,4 @@ public class Student {
         this.email = email;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
 }
