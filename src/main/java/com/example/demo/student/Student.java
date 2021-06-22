@@ -7,6 +7,10 @@ import javax.persistence.*;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name="Student")
+@Table(name="student", uniqueConstraints = {
+        @UniqueConstraint(name = "name_of_email_constraint", columnNames = "email")
+})
+
 public class Student {
     @Id
     @SequenceGenerator(
