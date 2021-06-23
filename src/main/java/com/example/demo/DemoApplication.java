@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class DemoApplication {
 
@@ -18,7 +20,11 @@ public class DemoApplication {
 	@Bean
 	CommandLineRunner commandLineRunner(studentRepository studentRepository){
 		return args -> {
-			studentRepository.save(new Student("Ali","Doggaz","alidoggaz@gmail.com"));
+			studentRepository.deleteAll();
+			Student Ali = new Student("Ali","Doggaz","alidoggaz@gmail.com");
+			Student Mohssen = new Student("Mohssen","Mhiri","TEST@gmail.com");
+			Student Taher = new Student("Taher","Kasperksy","QDQQDQ@gmail.com");
+			studentRepository.saveAll(List.of(Ali, Mohssen, Taher));
 		};
 	}
 

@@ -7,9 +7,7 @@ import javax.persistence.*;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name="Student")
-@Table(name="student", uniqueConstraints = {
-        @UniqueConstraint(name = "name_of_email_constraint", columnNames = "email")
-})
+@Table(name="student")
 
 public class Student {
     @Id
@@ -29,14 +27,17 @@ public class Student {
     private long id;
 
     @NotNull
+    @Column(name="firstName"
+    )
     private String firstName;
 
     @NotNull
+    @Column(name="lastName"
+    )
     private String lastName;
 
     @NotNull
-    @Column(
-            unique = true
+    @Column(name="email"
     )
     private String email;
 
@@ -65,11 +66,11 @@ public class Student {
         this.id = id;
     }
 
-    public String getFirstNname() {
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstNname(String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
@@ -88,5 +89,4 @@ public class Student {
     public void setEmail(String email) {
         this.email = email;
     }
-
 }
